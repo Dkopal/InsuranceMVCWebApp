@@ -1,0 +1,167 @@
+﻿@model InsuranceMVCWebApp.Models.InsurancePersonModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Insurance Detail</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Insurance.InsuranceType)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Insurance.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Insurance.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Insurance.DateFrom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Insurance.DateFrom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Insurance.DateTo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Insurance.DateTo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Insurance.CreatedWhen)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Insurance.CreatedWhen)
+        </dd>
+        <dd class="">
+            <a asp-action="Edit" asp-route-id="@Model.Insurance.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model.Insurance.Id" class="btn btn-danger">Delete</a>
+        </dd>
+    </dl>
+
+    <h4>Policy Holder</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Address
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.PolicyHolder.Name) @Html.DisplayFor(model => model.PolicyHolder.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.PolicyHolder.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.PolicyHolder.Address.Street) @Html.DisplayFor(model => model.PolicyHolder.Address.StreetNumber),
+                    @Html.DisplayFor(model => model.PolicyHolder.Address.City), @Html.DisplayFor(model => model.PolicyHolder.Address.PostalCode)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.PolicyHolder.Id" asp-controller="FullPerson" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@Model.PolicyHolder.Id" asp-controller="FullPerson" class="btn btn-secondary">Details</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <h4>Insured person</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Address
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PersonAsInsuredPerson)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.Street) @Html.DisplayFor(modelItem => item.Address.StreetNumber),
+                        @Html.DisplayFor(modelItem => item.Address.City), @Html.DisplayFor(modelItem => item.Address.PostalCode)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="FullPerson" class="btn btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" asp-controller="FullPerson" class="btn btn-secondary">Details</a>
+                        <a asp-action="Remove" asp-route-secondId="@Model.Insurance.Id" asp-route-id="@item.Id" asp-route-personType="2" asp-controller="FullPerson" class="btn btn-danger">Remove</a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-action="Add" asp-route-id="@Model.Insurance.Id" asp-controller="FullPerson" class="btn btn-success">Add new person</a>
+    </div>
+    <h4>Insured Events</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Event number
+                </th>
+                <th>
+                    Descriptions
+                </th>
+                <th>
+                    Reported on
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.InsuredEventModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id) 
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descriptions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedWhen)                        
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="InsuredEvent" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" asp-controller="InsuredEvent" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-action="Create" asp-route-id="@Model?.Insurance.Id" a asp-controller="InsuredEvent" class="btn btn-success">Create new insured event</a>
+    </div>
+    <br/>
+</div>
+<div>    
+    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+</div>

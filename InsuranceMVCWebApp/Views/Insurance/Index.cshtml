@@ -1,0 +1,71 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model IPagedList<InsuranceMVCWebApp.Models.InsurancePersonModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of insurances</h1>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Number
+            </th>
+            <th>
+                Insurance Type
+            </th>
+            <th>
+                Date From
+            </th>
+            <th>
+                Date To
+            </th>
+            <th>
+                Created when
+            </th>
+            <th>
+                Policy Holder
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insurance.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insurance.InsuranceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insurance.DateFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insurance.DateTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insurance.CreatedWhen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PolicyHolder.Name) @Html.DisplayFor(modelItem => item.PolicyHolder.Surname)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Insurance.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Insurance.Id" class="btn btn-secondary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Insurance.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<div class="justify-content-md-center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",new {page}))
+</div>

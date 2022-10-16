@@ -1,0 +1,110 @@
+﻿@model InsuranceMVCWebApp.Models.PersonAddressModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit person</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <table>
+                <thead>
+                    <h4>Personal information</h4>
+                    <hr />
+                </thead>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Surname" class="control-label"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                    </td>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Pid" class="control-label"></label>
+                            <input asp-for="Pid" class="form-control" />
+                            <span asp-validation-for="Pid" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <thead>
+                    <hr />
+                    <h4>Adress information</h4>
+                    <hr />
+                </thead>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Street" class="control-label"></label>
+                            <input asp-for="Street" class="form-control" />
+                            <span asp-validation-for="Street" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="StreetNumber" class="control-label"></label>
+                            <input asp-for="StreetNumber" class="form-control" />
+                            <span asp-validation-for="StreetNumber" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="City" class="control-label"></label>
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="PostalCode" class="control-label"></label>
+                            <input asp-for="PostalCode" class="form-control" />
+                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" /> 
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-dark">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,12 @@
+﻿@model InsuranceMVCWebApp.Models.InsuranceAddPersonModel
+
+@{
+    ViewData["Title"] = "PersonNotExist";
+}
+
+<h1>Person not exists.</h1>
+<h4>Create new person and retry the action</h4>
+<div>
+    <a asp-action="Create" asp-controller="FullPerson" class="btn btn-success">Create new person</a>
+    <a asp-action="Details" asp-controller="Insurance" asp-route-id="@TempData["InsuranceId"]" class="btn btn-dark">Back</a>
+</div>

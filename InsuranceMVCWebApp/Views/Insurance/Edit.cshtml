@@ -1,0 +1,44 @@
+﻿@using InsuranceMVC.DAL.Entities.Enums;
+@model InsuranceMVCWebApp.Models.InsuranceModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Insurance edit</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="PolicyHolderId" />
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.SelectedInsuranceType, new List<SelectListItem>{
+                new SelectListItem{Text="Life insurance", Value="1",Selected=Model.SelectedInsuranceType==InsurancesType.LifeInsurance},
+                new SelectListItem{Text="Travel insurance", Value="2",Selected=Model.SelectedInsuranceType==InsurancesType.TravelInsurance},
+                new SelectListItem{Text="Accident insurance", Value="3",Selected=Model.SelectedInsuranceType==InsurancesType.AccidentInsurance},
+                }, "Select Insurance Type")
+            </div>
+            <div class="form-group">
+                <label asp-for="DateFrom" class="control-label"></label>
+                <input asp-for="DateFrom" class="form-control" />
+                <span asp-validation-for="DateFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTo" class="control-label"></label>
+                <input asp-for="DateTo" class="form-control" />
+                <span asp-validation-for="DateTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-dark">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

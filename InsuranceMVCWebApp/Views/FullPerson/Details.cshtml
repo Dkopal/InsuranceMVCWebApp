@@ -1,0 +1,171 @@
+﻿@model InsuranceMVCWebApp.Models.FullPersonModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detail of the person</h1>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Name)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Surname)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Surname)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Phone)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Phone)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Email)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Email)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Pid)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Pid)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Address.Street)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Address.Street)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Address.StreetNumber)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Address.StreetNumber)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Address.City)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Address.City)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Person.Address.PostalCode)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Person.Address.PostalCode)
+    </dd>
+</dl>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Person.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Person.Id" class="btn btn-danger">Delete</a>
+</div>
+<h4>Isurances as policy holder</h4>
+<a asp-action="create" asp-route-id="@Model.Person.Id" asp-controller="Insurance" class="btn btn-success">Create new insurance</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Insurance number
+            </th>
+            <th>
+                Insurance type
+            </th>
+            <th>
+                Date from
+            </th>
+            <th>
+                Date To
+            </th>
+            <th>
+                Created when
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.InsurancesAsPolicyHolder)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsuranceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedWhen)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="Insurance" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Insurance" class="btn btn-secondary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Isurances as insured person</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Insurance number
+            </th>
+            <th>
+                Insurance type
+            </th>
+            <th>
+                Date from
+            </th>
+            <th>
+                Date To
+            </th>
+            <th>
+                Created when
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.InsurancesAsInsuredPerson)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsuranceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedWhen)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="Insurance" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Insurance" class="btn btn-secondary">Details </a>
+                    <a asp-action="Remove" asp-route-secondId="@Model.Person.Id" asp-route-id="@item.Id" asp-route-personType="2" asp-controller="Insurance" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" class="btn btn-dark" >Back</a>
+</div>

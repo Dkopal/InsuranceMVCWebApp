@@ -1,0 +1,36 @@
+﻿@model InsuranceMVCWebApp.Models.InsuranceAddPersonModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add person to Insurance  @Html.DisplayFor(modelItem => modelItem.InsuranceId)</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InsuranceId" />
+            <div>
+                <h4>Please enter Pid number of person what you want to add to this insurance</h4>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Pid" class="control-label"></label>
+                    <input asp-for="Pid" class="form-control " />
+                    <span asp-validation-for="Pid" class="text-danger"></span>                                      
+                </div>
+                <br />
+                <div >
+                    <input type="submit" value="Add" class="btn btn-success"/> <a asp-action="Details" asp-controller="Insurance" asp-route-id="@Model.InsuranceId" class="btn btn-dark">Back to insurance</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

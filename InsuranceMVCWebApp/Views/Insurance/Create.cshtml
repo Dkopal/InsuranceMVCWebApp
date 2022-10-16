@@ -1,0 +1,45 @@
+﻿@using InsuranceMVC.DAL.Entities.Enums;
+@model InsuranceMVCWebApp.Models.InsuranceModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>New insurance</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input type="hidden" asp-for="PolicyHolderId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.SelectedInsuranceType, new List<SelectListItem>{
+                    new SelectListItem{Text="Life insurance", Value="1"},
+                new SelectListItem{Text="Travel insurance", Value="2"},
+                new SelectListItem{Text="Accident insurance", Value="3"},
+                }, "Select Insurance Type")
+          </div>
+            <div class="form-group">
+                <label asp-for="DateFrom" class="control-label"></label>
+                <input asp-for="DateFrom" class="form-control" />
+                <span asp-validation-for="DateFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTo" class="control-label"></label>
+                <input asp-for="DateTo" class="form-control" />
+                <span asp-validation-for="DateTo" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <label asp-for="IsPolicyHolderInsuredPerson" class="control-label"></label>
+               @Html.CheckBoxFor(m=>m.IsPolicyHolderInsuredPerson)
+            </div>                 
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-dark">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
